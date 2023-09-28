@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 public class Shoot : MonoBehaviour
 {
-    public GameObject Ball;
+    
+    
     public Transform Cannon;
     public float bulletForce;
-   
-     void Update()
+    public float objectLifetime = 3;
+    public Rigidbody ballPrefab;
+
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -18,11 +22,27 @@ public class Shoot : MonoBehaviour
 
     void ShootBall()
     {
-        GameObject bulletClone = Instantiate(Ball, Cannon.position, Cannon.rotation);
-        Rigidbody rb = bulletClone.GetComponent<Rigidbody>();
-        rb.AddRelativeForce(Vector3.up * bulletForce, ForceMode.Impulse);
-        Destroy(bulletClone, 5f);
+        Rigidbody spawnedObject = Pooling.SharedInstance.GetPooledObject().GetComponent<Rigidbody>();
+
+        if (spawnedObject != null)
+        {
+            spawnedObject.transform.position = Cannon.position;
+            spawnedObject.transform.rotation = Quaternion.identity;
+            spawnedObject.gameObject.SetActive(true);
+            spawnedObject.velocity = Cannon.forward * bulletForce;
+
+            StartCoroutine(DeactivateObject(spawnedObject.gameObject));
+        }
     }
+    IEnumerator DeactivateObject(GameObject objToDeactivate)
+    {
+        yield return new WaitForSeconds(objectLifetime);
+
+
+        objToDeactivate.SetActive(false);
+    }
+
+}
     
         
-}
+
