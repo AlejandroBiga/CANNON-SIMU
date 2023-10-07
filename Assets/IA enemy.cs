@@ -8,22 +8,20 @@ public class IAenemy : MonoBehaviour
     public Transform[] destinations; 
     private int currentDestinationIndex = 0; 
     private NavMeshAgent agent;
+    private Animator animator;
 
     private bool isWaiting = false;
-    private float waitTime = 3f;
+    private float waitTime = 4f;
     private float destinationThreshold = 0.1f;
 
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();    
         if(destinations.Length > 0)
         {
             MoveAgentToDest();
-        }
-        else
-        {
-            Debug.Log("No destinations assigned to the agent.");
         }
         
     }
@@ -46,18 +44,19 @@ public class IAenemy : MonoBehaviour
         if(currentDestinationIndex >= 0 &&  currentDestinationIndex < destinations.Length)
         {
             agent.SetDestination(destinations[currentDestinationIndex].position);
-
+            animator.SetBool("IsWalking", true);
             isWaiting = false;
         }
         else
         {
-            Debug.Log("Destination index out of range.");
+            Debug.Log("out of range.");
         }
 
     }
 
     private IEnumerator WaitAtDestination()
     {
+        animator.SetBool("IsWalking", false);
         isWaiting = true;
         yield return new WaitForSeconds(waitTime);
         isWaiting = false;
