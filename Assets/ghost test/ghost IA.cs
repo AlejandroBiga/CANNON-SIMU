@@ -7,8 +7,7 @@ public class ghostIA : MonoBehaviour
 {
     private GameObject player;
     public float speedChase;
-    public GameObject canvasObject;
-    public float canvasDisplayTime = 6.0f;
+    
 
     private bool collided = false;
 
@@ -32,27 +31,5 @@ public class ghostIA : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (!collided)
-            {
-                collided = true;
-                
-                canvasObject.SetActive(true);
-                
-                StartCoroutine(DisableCanvas());
-            }
-        }
-    }
-
-    private IEnumerator DisableCanvas()
-    {
-        yield return new WaitForSeconds(canvasDisplayTime);
-        
-        canvasObject.SetActive(false);
-        
-        Destroy(gameObject);
-    }
+    
 }

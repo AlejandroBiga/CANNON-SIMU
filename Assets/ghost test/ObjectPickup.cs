@@ -12,7 +12,6 @@ public class ObjectPickup : MonoBehaviour
         {
             
             enemyScript.enabled = true;
-            
             gameObject.SetActive(false);
         }
     }
