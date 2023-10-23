@@ -600,8 +600,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.837624, y: 0, z: 2.9874573}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.21, y: 1.21, z: 1.21}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7608041765723316196}
   - {fileID: 2161261354362144108}
@@ -643,7 +643,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -686,8 +686,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedChase: 20
-  canvasObject: {fileID: 3455237909909358341, guid: 995c0b798eefa2740a30cb4c0c40823c, type: 3}
-  canvasDisplayTime: 4
 --- !u!1 &2433330768535534978
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,29 +4,19 @@ using UnityEngine;
 
 public class PlayerColision : MonoBehaviour
 {
-    public GameObject canvasObject;
-    public float canvasDisplayTime = 6.0f;
-    private bool collided = false;
+    public GameObject canvas; 
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("conchade la lora");
-            if (!collided)
-            {
-                collided = true;
-
-               
-                canvasObject.SetActive(true);
-                StartCoroutine(DisableCanvas());
-            }
+            ShowCanvas();
         }
     }
 
-    private IEnumerator DisableCanvas()
+    private void ShowCanvas()
     {
-        yield return new WaitForSeconds(canvasDisplayTime);
-        canvasObject.SetActive(false);
+        canvas.SetActive(true); 
     }
 }
